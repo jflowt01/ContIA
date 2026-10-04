@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142b45">
+  <meta name="description" content="ContIA: practica conceptos de contabilidad y NIF con respuestas preparadas y ejercicios de asientos contables, sin conectar una IA.">
+  <title>ContIA · Tu espacio para aprender contabilidad</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%23142b45'/%3E%3Cpath d='M28 13a11 11 0 1 0 0 14' fill='none' stroke='%23c3eb73' stroke-width='5'/%3E%3C/svg%3E">
+  <style>
+    /* Todo el diseño está aquí: no necesitas instalar librerías ni descargar fuentes. */
+    :root{color-scheme:light;--navy:#142b45;--navy-2:#203d5b;--ink:#182c43;--muted:#627082;--border:#e1e7ec;--bg:#f5f7fa;--white:#fff;--green:#c3eb73;--blue:#225dc6;--blue-soft:#edf3ff;--radius:18px;--shadow:0 5px 24px #142b4506}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif;font-size:16px;line-height:1.55}
+    button,input,select,textarea{font:inherit}
+    button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+    button{cursor:pointer}
+    button{color:inherit}
+    button:disabled{cursor:not-allowed;opacity:.5}
+    a{color:var(--blue);text-underline-offset:3px}
+    button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #74a5ff;outline-offset:4px}
+    button,a{touch-action:manipulation}
+    button svg,a svg{flex-shrink:0}
+    h1,h2,h3,p{margin:0}
+    .icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .skip{position:fixed;left:15px;top:-70px;z-index:30;padding:12px 20px;background:var(--navy);color:white;border-radius:8px}
+    .skip:focus{top:15px}
+    .app{display:grid;grid-template-columns:236px minmax(0,1fr);min-height:100vh}
+    .sidebar{background:var(--navy);color:#d3dce5;display:flex;flex-direction:column;padding:34px 22px 22px;gap:32px;position:sticky;top:0;height:100dvh;min-height:650px}
+    .brand{display:flex;align-items:center;gap:11px;color:#fff;text-decoration:none;font-size:27px;font-weight:750;letter-spacing:-1px}
+    .brand em{font-style:normal;color:var(--green)}
+    .brand-mark{height:37px;width:37px;border-radius:11px;background:var(--green);display:grid;place-items:center;color:var(--navy);font-size:25px;font-weight:750;letter-spacing:-2px;padding-right:2px}
+    .brand-sub{font-size:12px;letter-spacing:1.7px;text-transform:uppercase;color:#a8b7c7;margin:9px 0 0 49px}
+    .sidebar-title{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#9fb0c3;font-weight:650;margin:0 12px 13px}
+    .side-button{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;color:#cbd6e2;text-align:left;padding:12px;border-radius:10px;font-size:14px;line-height:1.35;min-height:46px}
+    .side-button:hover{background:#ffffff0a;color:white}
+    .side-button[aria-current="true"]{background:#2b4560;color:#fff;box-shadow:inset 3px 0 var(--green)}
+    .side-button .icon{width:19px;height:19px}
+    .side-code{display:block;font-size:12px;color:#9bb0c6;margin-top:3px;font-weight:400}
+    .topic-nav{display:flex;flex-direction:column;gap:5px}
+    .side-bottom{margin-top:auto;border-top:1px solid #ffffff1a;padding-top:23px}
+    .mode-label{display:flex;align-items:center;gap:8px;font-size:14px;color:#e2e9f1;font-weight:600}
+    .side-bottom p{font-size:13px;color:#a8b7c7;line-height:1.65;margin-top:9px}
+    .side-bottom a{display:inline-block;font-size:13px;color:#d2e4ff;margin-top:14px}
+    .workspace{min-width:0}
+    .topbar{min-height:83px;background:#ffffffd9;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:15px;padding:17px 36px}
+    .breadcrumb{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted)}
+    .breadcrumb strong{font-weight:600;color:var(--ink)}
+    .demo-badge{display:flex;align-items:center;gap:7px;background:#f0f4f8;border:1px solid #e3e9ef;border-radius:7px;padding:5px 10px;font-size:12px;color:#526479;white-space:nowrap}
+    .demo-badge .icon{width:15px;height:15px}
+    main{padding:30px 36px 22px;max-width:1500px;margin:auto}
+    .page-heading{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:25px}
+    .eyebrow{font-size:12px;letter-spacing:1.7px;color:var(--muted);font-weight:650;text-transform:uppercase;margin-bottom:5px}
+    h1{font-size:29px;line-height:1.25;font-weight:680;letter-spacing:-1px}
+    .reset{border:1px solid var(--border);border-radius:9px;background:white;display:flex;gap:8px;align-items:center;padding:10px 13px;font-size:14px;font-weight:600;white-space:nowrap}
+    .reset:hover{background:#edf2f7;border-color:#c2cfdb}
+    .reset .icon{width:17px;height:17px}
+    .work-grid{display:grid;grid-template-columns:minmax(0,1fr) 303px;gap:22px;align-items:start}
+    .chat-panel{height:650px;height:min(700px,calc(100dvh - 234px));min-height:560px;display:flex;flex-direction:column;background:white;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .chat-header{border-bottom:1px solid var(--border);padding:17px 22px;display:flex;gap:11px;align-items:center}
+    .avatar{width:36px;height:36px;border:1px solid #dbe5f7;border-radius:11px;background:var(--blue-soft);display:grid;place-items:center;color:var(--blue);flex-shrink:0;font-size:14px;font-weight:750}
+    .chat-header h2{font-size:15px;font-weight:650;line-height:1.3}
+    .chat-header p{font-size:12px;color:var(--muted);margin-top:3px}
+    .chat-header .tag{margin-left:auto;font-size:12px;color:#426046;border-radius:5px;background:#edf5e8;padding:3px 7px}
+    .chat-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:27px 24px 20px;scroll-padding:20px}
+    .welcome{max-width:640px;margin:0 auto;padding-top:9px}
+    .welcome-symbol{width:47px;height:47px;border-radius:14px;color:var(--navy);background:#ecf5dd;display:grid;place-items:center;margin-bottom:17px}
+    .welcome-symbol .icon{width:27px;height:27px}
+    .welcome h2{font-size:25px;letter-spacing:-.6px;line-height:1.25;font-weight:650;margin-bottom:11px}
+    .welcome>p{color:var(--muted);font-size:16px;max-width:490px;line-height:1.65}
+    .prompt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:23px 0 21px}
+    .prompt{border:1px solid var(--border);border-radius:11px;background:#fff;padding:14px 15px;display:flex;flex-direction:column;align-items:flex-start;gap:7px;text-align:left;transition:border-color .15s,background .15s;min-height:105px}
+    .prompt:hover{background:#f7faff;border-color:#9cb8eb}
+    .prompt .icon{width:20px;height:20px;color:var(--blue)}
+    .prompt strong{font-weight:600;font-size:14px}
+    .prompt span{font-size:12px;color:var(--muted)}
+    .welcome-note{font-size:12px!important;color:#718093!important;display:flex;align-items:center;gap:6px}
+    .welcome-note .icon{height:15px;width:15px;flex-shrink:0}
+    .message{display:flex;gap:10px;margin:0 0 23px;animation:appear .2s ease-out;min-width:0}
+    .message .avatar{width:29px;height:29px;border-radius:9px;font-size:12px;margin-top:2px}
+    .message-body{min-width:0;max-width:100%;flex:1}
+    .message-label{font-size:12px;font-weight:650;color:#596b7f;margin-bottom:7px}
+    .answer{font-size:16px;line-height:1.7;overflow-wrap:anywhere}
+    .answer p+p{margin-top:10px}
+    .answer h3{font-size:17px;line-height:1.4;margin-bottom:10px;letter-spacing:-.25px}
+    .answer ul{padding-left:20px;margin:10px 0}
+    .answer li+li{margin-top:5px}
+    .answer .example{margin-top:13px;padding:12px 14px;border-left:3px solid #b7d882;background:#f5f9ef;border-radius:0 8px 8px 0;font-size:14px}
+    .answer .reference{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted)}
+    .answer .reference a{color:#587295}
+    .message.user{justify-content:flex-end}
+    .message.user .message-body{flex:0 1 auto;max-width:88%;padding:11px 16px;background:var(--navy);border-radius:13px 13px 3px 13px;color:white;white-space:pre-wrap;overflow-wrap:anywhere}
+    .message.user .answer{font-size:16px}
+    .followups{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}
+    .followup{border:1px solid #dce5ef;border-radius:7px;font-size:12px;background:white;color:#456284;padding:6px 9px;text-align:left}
+    .followup:hover{background:var(--blue-soft);border-color:#a4bce5}
+    .composer-area{padding:15px 20px 12px;border-top:1px solid var(--border);background:#fff}
+    .composer{display:flex;align-items:flex-end;gap:10px;border:1px solid #ced9e4;border-radius:12px;padding:9px 10px 9px 13px;transition:box-shadow .15s}
+    .composer:focus-within{border-color:#6794dc;box-shadow:0 0 0 3px #3970c910}
+    textarea{flex:1;min-width:0;width:100%;resize:none;background:transparent;border:0;outline:none!important;line-height:1.45;font-size:14px;padding:7px 0;max-height:128px;color:var(--ink)}
+    textarea::placeholder{color:#778598}
+    .send{border:0;border-radius:8px;height:36px;width:38px;display:grid;place-items:center;background:var(--navy);color:white;flex-shrink:0}
+    .send:hover:not(:disabled){background:#2c5279}
+    .send .icon{width:18px;height:18px}
+    .input-meta{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#778498;padding:8px 2px 0}
+    .typing{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;padding:3px 0 17px}
+    .typing span{display:flex;gap:3px}
+    .typing i{display:block;width:5px;height:5px;background:#8093aa;border-radius:50%;animation:pulse 1s infinite}
+    .typing i:nth-child(2){animation-delay:.12s}.typing i:nth-child(3){animation-delay:.24s}
+    .practice-column{display:flex;flex-direction:column;gap:17px;min-width:0}
+    .practice-card{background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+    .practice-heading{background:var(--navy);color:white;padding:22px}
+    .practice-heading .overline{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#d3edaa;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+    .practice-heading .icon{width:16px;height:16px}
+    .practice-heading h2{font-size:21px;line-height:1.3;letter-spacing:-.4px;font-weight:600}
+    .practice-heading p{font-size:13px;color:#c0cedb;line-height:1.6;margin-top:9px}
+    .practice-body{padding:21px}
+    label{display:block;font-size:14px;font-weight:600;color:#3e536b;margin-bottom:7px}
+    select,.money-field{width:100%;border:1px solid #d4dee7;background:white;border-radius:8px;color:var(--ink);min-height:43px;font-size:14px}
+    select{padding:9px 28px 9px 10px;max-width:100%}
+    .form-field+.form-field{margin-top:15px}
+    .money-field{display:flex;align-items:center;gap:8px;padding:0 11px}
+    .money-field span{font-size:14px;color:#7e8b9a}
+    .money-field input{width:100%;min-width:0;border:0;background:none;padding:9px 0;font-size:16px;color:var(--ink);font-variant-numeric:tabular-nums}
+    .money-field input:focus-visible{outline-offset:1px}
+    .field-hint{font-size:12px;color:var(--muted);margin-top:6px}
+    .calculate{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;background:var(--green);color:var(--navy);border-radius:8px;padding:11px 10px;font-size:14px;font-weight:700;margin-top:18px}
+    .calculate:hover{background:#b2df5b}
+    .calculate .icon{width:17px;height:17px}
+    .form-error{color:#b33b3b;font-size:13px;margin-top:9px}
+    .result{margin-top:18px;border-top:1px solid var(--border);padding-top:15px}
+    .result-title{font-size:13px;font-weight:650;color:#317345;display:flex;align-items:center;gap:6px;margin-bottom:10px}
+    .result-title .icon{height:16px;width:16px}
+    .table-wrap{overflow-x:auto;max-width:100%;border:1px solid var(--border);border-radius:9px;margin:12px 0}
+    table{border-collapse:collapse;width:100%;font-size:12px;line-height:1.45;font-variant-numeric:tabular-nums}
+    th{text-align:left;background:#f3f6fa;color:#647386;font-size:11px;font-weight:650;padding:9px 8px}
+    td{padding:10px 8px;border-top:1px solid #e9edf2;vertical-align:top}
+    th:not(:first-child),td:not(:first-child){text-align:right;white-space:nowrap}
+    tfoot td{background:#f8fafc;font-weight:650;color:var(--ink)}
+    .answer table{font-size:13px}.answer th{font-size:12px}
+    .answer .table-wrap{margin-top:14px}
+    .result p{font-size:12px;line-height:1.6;color:var(--muted)}
+    .equation-card{border:1px solid var(--border);border-radius:14px;background:#edf2f7;padding:19px 21px}
+    .equation-card .eyebrow{font-size:11px;letter-spacing:1.2px;margin-bottom:9px}
+    .equation{display:flex;justify-content:space-between;gap:5px;align-items:center;font-size:13px;font-weight:650;color:#3a5470;white-space:nowrap}
+    .equation b{font-size:15px;font-weight:450;color:#687d94}
+    .equation-card p{font-size:12px;color:#62758a;margin-top:10px}
+    .page-footer{margin-top:18px;display:flex;justify-content:space-between;gap:15px;color:#748295;font-size:12px}
+    .page-footer a{color:#536f91;white-space:nowrap}
+    [hidden]{display:none!important}
+    dialog{border:1px solid var(--border);border-radius:18px;padding:27px;max-width:420px;width:calc(100% - 36px);box-shadow:0 24px 80px #10263e3a;color:var(--ink)}
+    dialog::backdrop{background:#142b4570;backdrop-filter:blur(3px)}
+    dialog h2{font-size:21px;margin-bottom:10px}
+    dialog p{font-size:15px;color:var(--muted)}
+    .dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}
+    .dialog-actions button{padding:9px 15px;border-radius:8px;border:1px solid var(--border);background:white;font-size:14px}
+    .dialog-actions .primary{background:var(--navy);color:white;border-color:var(--navy)}
+    @keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes pulse{50%{opacity:.3}}
+    @media(min-width:1600px){.app{grid-template-columns:258px minmax(0,1fr)}.sidebar{padding-left:29px;padding-right:29px}.work-grid{grid-template-columns:minmax(0,1fr) 340px}.chat-panel{max-height:780px;height:calc(100dvh - 238px)}}
+    @media(max-width:1230px){.app{grid-template-columns:205px minmax(0,1fr)}.sidebar{padding:29px 15px 20px}.topbar{padding-left:25px;padding-right:25px}main{padding:25px}.work-grid{grid-template-columns:minmax(0,1fr) 272px;gap:17px}.chat-scroll{padding:23px 20px}.practice-body{padding:18px}.practice-heading{padding:20px}.welcome h2{font-size:23px}.prompt{padding:12px}.equation-card{padding:17px}.input-meta .keyboard-hint{display:none}}
+    @media(max-width:1040px){.app{grid-template-columns:190px minmax(0,1fr)}.work-grid{grid-template-columns:minmax(0,1fr)}.practice-column{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}.chat-panel{height:620px;min-height:520px}.chat-scroll{padding:26px}.sidebar{min-height:620px}.side-button{padding:11px 9px}h1{font-size:26px}.welcome{max-width:540px}.prompt-grid{margin-top:25px}.equation{justify-content:flex-start;gap:10px}}
+    @media(max-width:700px){.app{display:block}.sidebar{position:relative;height:auto;min-height:0;padding:17px 20px;gap:0}.brand{font-size:24px}.brand-mark{width:33px;height:33px;font-size:23px}.brand-sub,.sidebar-title,.side-bottom,.sidebar>nav:first-of-type{display:none}.topic-nav{flex-direction:row;overflow-x:auto;margin:16px -20px -3px;padding:0 20px 5px;gap:8px;scrollbar-width:thin}.side-button{width:auto;flex-shrink:0;border:1px solid #ffffff23;padding:8px 11px;min-height:37px;font-size:12px}.topic-nav .icon,.side-code{display:none}.side-button[aria-current="true"]{box-shadow:none;border-color:#8db74b}.topbar{min-height:49px;padding:12px 20px}.breadcrumb{font-size:12px;gap:8px}.breadcrumb>span,.breadcrumb>.icon{display:none}.demo-badge{font-size:11px;padding:3px 6px}main{padding:22px 16px}.page-heading{margin-bottom:19px;align-items:flex-end}.eyebrow{font-size:10px;letter-spacing:1.2px}h1{font-size:23px;letter-spacing:-.6px}.reset{font-size:12px;padding:8px 10px;gap:6px}.reset .icon{width:15px;height:15px}.work-grid{gap:18px}.chat-panel{height:590px;min-height:500px;border-radius:14px}.chat-header{padding:15px 17px}.chat-scroll{padding:23px 18px}.welcome h2{font-size:23px}.welcome>p{font-size:14px}.prompt-grid{gap:9px;margin:22px 0 18px}.prompt{min-height:107px;padding:12px}.prompt strong{font-size:13px}.prompt span{font-size:11px}.composer-area{padding:12px}.input-meta{font-size:11px}.practice-column{grid-template-columns:minmax(0,1fr)}.equation-card{padding:19px 22px}.equation{gap:13px;font-size:15px}.practice-heading h2{font-size:23px}.practice-body{padding:21px}.practice-heading{padding:22px}.page-footer{display:block;line-height:1.7}.page-footer a{display:inline-block;margin-top:9px}.answer{font-size:14px}.answer h3{font-size:16px}}
+    @media(max-width:370px){h1{font-size:21px}.reset span{display:none}.chat-header .tag{display:none}.chat-scroll{padding:19px 14px}.prompt{padding:11px}.welcome h2{font-size:21px}.chat-panel{height:620px}.breadcrumb strong{font-size:11px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <!-- Iconos vectoriales de interfaz: el archivo funciona sin recursos externos. -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6A8.4 8.4 0 0 1 12.5 3h.5a8.5 8.5 0 0 1 8 8v.5Z"/><path d="M8 10h8M8 14h5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5v16M3 3h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5v16h-5a4 4 0 0 0-4 2 4 4 0 0 0-4-2H3V3Z"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5ZM3 8v9l9 5 9-5V8M12 13v9M7.5 5.5l9 5"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M8 16v-5M13 16V6M18 16v-8"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M8 6h8M8 11h1M15 11h1M8 15h1M15 15h1M8 19h1M15 19h1"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3ZM20 2v4M18 4h4"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 10a9 9 0 1 1 2.3 8M3 4v6h6"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7ZM22 2 11 13"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 4v6c0 5-8 8-8 8s-8-3-8-8V7l8-4Z"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 10 6-10 6L2 9l10-6ZM2 13l10 6 10-6M2 17l10 6 10-6"/></symbol>
+  </svg>
+  <a class="skip" href="#question">Ir al chat</a>
+  <div class="app">
+    <aside class="sidebar" aria-label="Temas de estudio">
+      <div><a class="brand" href="#main" aria-label="ContIA, inicio"><span class="brand-mark" aria-hidden="true">C</span><span>Cont<em>IA</em></span></a><div class="brand-sub">Contabilidad clara</div></div>
+      <nav aria-label="Espacio de estudio"><p class="sidebar-title">Tu espacio</p><button class="side-button" id="home-button" aria-current="true"><svg class="icon"><use href="#i-chat"/></svg>Asistente contable</button></nav>
+      <nav aria-label="Consultar un tema"><p class="sidebar-title">Explora los temas</p><div class="topic-nav">
+        <button class="side-button" data-topic="nif"><svg class="icon"><use href="#i-book"/></svg><span>Marco conceptual<span class="side-code">NIF A-1</span></span></button>
+        <button class="side-button" data-topic="inventory"><svg class="icon"><use href="#i-box"/></svg><span>Inventarios<span class="side-code">NIF C-4</span></span></button>
+        <button class="side-button" data-topic="statements"><svg class="icon"><use href="#i-chart"/></svg><span>Estados financieros<span class="side-code">Panorama general</span></span></button>
+        <button class="side-button" data-topic="depreciation"><svg class="icon"><use href="#i-layers"/></svg><span>Depreciación<span class="side-code">NIF C-6</span></span></button>
+        <button class="side-button" data-topic="entry"><svg class="icon"><use href="#i-calc"/></svg><span>Debe y haber<span class="side-code">Partida doble</span></span></button>
+      </div></nav>
+      <div class="side-bottom"><div class="mode-label"><svg class="icon"><use href="#i-shield"/></svg>Aprende a tu ritmo</div><p>Respuestas preparadas y ejemplos para entender lo esencial.</p><a href="https://www.cinif.org.mx/" target="_blank" rel="noopener noreferrer">Consultar el portal del CINIF</a></div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar"><div class="breadcrumb"><svg class="icon"><use href="#i-book"/></svg><span>Espacio de estudio</span><span aria-hidden="true">/</span><strong>Contabilidad financiera</strong></div><span class="demo-badge"><svg class="icon"><use href="#i-info"/></svg>Modo demostración</span></header>
+      <main id="main">
+        <div class="page-heading"><div><p class="eyebrow">Aprende · Consulta · Practica</p><h1>Un concepto a la vez.</h1></div><button class="reset" id="reset-button"><svg class="icon"><use href="#i-reset"/></svg><span>Nueva consulta</span><span class="sr-only">: reiniciar conversación</span></button></div>
+        <div class="work-grid">
+          <section class="chat-panel" aria-labelledby="chat-title">
+            <div class="chat-header"><div class="avatar" aria-hidden="true"><svg class="icon"><use href="#i-spark"/></svg></div><div><h2 id="chat-title">Tu tutor ContIA</h2><p>Conceptos de contabilidad y NIF</p></div><span class="tag">Práctica</span></div>
+            <div class="chat-scroll" id="chat-scroll" tabindex="0" aria-label="Conversación y sugerencias">
+              <div class="welcome" id="welcome"><div class="welcome-symbol" aria-hidden="true"><svg class="icon"><use href="#i-spark"/></svg></div><h2>¿Qué vamos a aprender hoy?</h2><p>Hola, soy ContIA. Repasemos los conceptos y llevémoslos a un ejemplo. Elige un tema o escribe tu pregunta.</p>
+                <div class="prompt-grid">
+                  <button class="prompt" data-topic="nif"><svg class="icon"><use href="#i-book"/></svg><strong>¿Qué son las NIF?</strong><span>Empecemos por lo esencial</span></button>
+                  <button class="prompt" data-topic="equation"><svg class="icon"><use href="#i-chart"/></svg><strong>Activo, pasivo y capital</strong><span>Entiende cómo se relacionan</span></button>
+                  <button class="prompt" data-topic="entry"><svg class="icon"><use href="#i-calc"/></svg><strong>Mi primer asiento</strong><span>Un ejemplo paso a paso</span></button>
+                  <button class="prompt" data-topic="depreciation"><svg class="icon"><use href="#i-layers"/></svg><strong>¿Cómo se deprecia?</strong><span>Con un ejemplo sencillo</span></button>
+                </div><p class="welcome-note"><svg class="icon"><use href="#i-info"/></svg>Respuestas predefinidas. No hay una IA conectada.</p>
+              </div>
+              <div id="messages" role="log" aria-live="polite" aria-relevant="additions" aria-label="Mensajes del chat"></div>
+              <div class="typing" id="typing" role="status" hidden><span aria-hidden="true"><i></i><i></i><i></i></span>Preparando el ejemplo…</div>
+            </div>
+            <div class="composer-area"><form class="composer" id="chat-form"><label for="question" class="sr-only">Escribe tu pregunta de contabilidad</label><textarea id="question" rows="1" maxlength="500" placeholder="Escribe una duda, por ejemplo: ¿qué es un activo?" aria-describedby="chat-limit"></textarea><button class="send" id="send-button" type="submit" aria-label="Enviar pregunta" disabled><svg class="icon"><use href="#i-send"/></svg></button></form><div class="input-meta"><span>Respuestas locales · Sin conexión a IA</span><span id="chat-limit"><span id="char-count">0</span>/500 <span class="keyboard-hint">· Enter para enviar</span></span></div></div>
+          </section>
+          <aside class="practice-column" aria-label="Ejercicio contable">
+            <section class="practice-card" id="practice"><div class="practice-heading"><p class="overline"><svg class="icon"><use href="#i-calc"/></svg>Del concepto a la práctica</p><h2>Construye tu<br>primer asiento.</h2><p>Elige una operación y observa qué cuentas se mueven.</p></div><div class="practice-body">
+              <form id="entry-form" novalidate><div class="form-field"><label for="operation">Operación</label><select id="operation"><option value="cash_purchase">Compra de inventario al contado</option><option value="credit_purchase">Compra de inventario a crédito</option><option value="capital">Aportación de capital</option><option value="supplier_payment">Pago a un proveedor</option></select></div><div class="form-field"><label for="amount">Importe de la operación</label><div class="money-field"><span aria-hidden="true">$</span><input id="amount" type="text" inputmode="decimal" value="1000" maxlength="16" autocomplete="off" aria-describedby="amount-hint form-error"><span>MXN</span></div><p class="field-hint" id="amount-hint">Ejemplo simplificado, sin impuestos.</p></div><p class="form-error" id="form-error" role="alert" hidden></p><button class="calculate" type="submit"><svg class="icon"><use href="#i-calc"/></svg>Generar asiento</button></form>
+              <div class="result" id="entry-result" role="region" aria-label="Asiento generado" aria-live="polite" hidden></div>
+            </div></section>
+            <section class="equation-card"><h2 class="eyebrow">Una idea para recordar</h2><div class="equation"><span>Activo</span><b>=</b><span>Pasivo</span><b>+</b><span>Capital</span></div><p>Lo que tienes = lo que debes + lo que te pertenece.</p></section>
+          </aside>
+        </div>
+        <footer class="page-footer"><p>Material introductorio. Para aplicar una norma, consulta su edición vigente y sus criterios específicos.</p><a href="https://www.cinif.org.mx/" target="_blank" rel="noopener noreferrer">Fuente de consulta: CINIF</a></footer>
+      </main>
+    </div>
+  </div>
+  <dialog id="reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description"><h2 id="reset-title">¿Empezamos de nuevo?</h2><p id="reset-description">Se borrará la conversación de esta sesión. Podrás volver a consultar cualquier tema.</p><div class="dialog-actions"><button id="cancel-reset" autofocus>Continuar estudiando</button><button class="primary" id="confirm-reset">Nueva consulta</button></div></dialog>
+  <script>
+    "use strict";
+    // 1. CONTENIDO: agrega temas aquí. Son resúmenes originales, no citas normativas.
+    // Los enlaces del CINIF sirven como referencia; el prototipo no consulta Internet.
+    const SOURCES = {
+      cinif: "https://www.cinif.org.mx/",
+      framework: "https://cinif.org.mx/files/NIF_A-1_Carta_PROMULGACION.pdf"
+    };
+    const TOPICS = {
+      nif: {
+        question: "¿Qué son las NIF y para qué sirven?", title: "NIF: una base común para la información financiera",
+        paragraphs: ["Las Normas de Información Financiera establecen bases para preparar y presentar información financiera en México. El CINIF es el organismo que las emite.", "La NIF A-1, Marco Conceptual de las Normas de Información Financiera, reúne los fundamentos que orientan el desarrollo y la aplicación de las normas particulares."],
+        example: "Para estudiar: empieza por los conceptos de activo, pasivo y capital; después relaciona cada operación con las cuentas que modifica.",
+        reference: "NIF A-1 · Marco Conceptual", source: "framework", related: ["equation", "entry"]
+      },
+      equation: {
+        question: "Explícame activo, pasivo y capital.", title: "La ecuación que conecta tus cuentas",
+        paragraphs: ["En términos introductorios, estas tres ideas describen la situación financiera de una entidad:"],
+        bullets: ["Activo: recursos que controla la entidad y de los que espera beneficios económicos. Ejemplos: efectivo e inventarios.", "Pasivo: obligaciones presentes de la entidad. Ejemplos: una deuda con un proveedor o un préstamo por pagar.", "Capital contable: el valor residual de los activos después de restar los pasivos."],
+        example: "Si los activos son $50,000 y los pasivos son $20,000, el capital es $30,000. Activo = Pasivo + Capital.", reference: "Conceptos introductorios · NIF A-1", source: "framework", related: ["asset", "liability", "capital"]
+      },
+      asset: {
+        question: "¿Qué es un activo?", title: "Activo: un recurso de la entidad",
+        paragraphs: ["Un activo es, de forma simplificada, un recurso controlado por una entidad, resultado de sucesos pasados, del que se esperan beneficios económicos.", "El dinero en bancos, las mercancías disponibles para vender y una computadora utilizada por el negocio son ejemplos. Tener un desembolso no implica, por sí solo, que exista un activo."],
+        example: "Al comprar inventario al contado por $1,000, aumenta Inventarios y disminuye Bancos por la misma cantidad. En este ejemplo no cambia el total del activo.", related: ["liability", "inventory", "entry"]
+      },
+      liability: {
+        question: "¿Qué es un pasivo?", title: "Pasivo: una obligación presente",
+        paragraphs: ["Un pasivo representa, de forma introductoria, una obligación presente derivada de sucesos pasados que requerirá entregar recursos para liquidarla.", "Por ejemplo, si compras mercancía a crédito, recibes inventario y contraes una deuda con el proveedor."],
+        example: "Compra a crédito por $1,000: se carga Inventarios y se abona Proveedores. Aumentan tanto el activo como el pasivo.", related: ["asset", "capital", "entry"]
+      },
+      capital: {
+        question: "¿Qué es el capital contable?", title: "Capital: lo que queda después de las deudas",
+        paragraphs: ["El capital contable es la diferencia entre los activos y los pasivos. Incluye conceptos como aportaciones de los propietarios y resultados acumulados.", "Una aportación de los socios no es un ingreso por ventas: cambia el patrimonio aportado a la entidad."],
+        example: "Si un socio aporta $5,000 a la cuenta bancaria, se carga Bancos por $5,000 y se abona Capital social por $5,000. Se supone una aportación formalizada y sin gastos asociados.", related: ["equation", "entry"]
+      },
+      entry: {
+        question: "¿Cómo hago un asiento y qué significan debe y haber?", title: "Tu primer asiento, paso a paso",
+        paragraphs: ["Un asiento registra una operación mediante cargos en el Debe y abonos en el Haber. En cada asiento, la suma del Debe debe ser igual a la suma del Haber.", "Como regla introductoria: los activos y gastos aumentan con cargos; los pasivos, el capital y los ingresos aumentan con abonos. Las disminuciones se registran en el lado opuesto, considerando la naturaleza específica de cada cuenta."],
+        example: "Compra de inventario al contado por $1,000, pagada desde Bancos. Se omiten impuestos, descuentos y gastos adicionales; se supone un sistema de inventarios perpetuos.",
+        entry: {operation:"cash_purchase",cents:100000},
+        after: "Practícalo en el generador: cambia la operación y el importe para ver otro asiento.", related: ["inventory", "equation"]
+      },
+      inventory: {
+        question: "¿Qué son los inventarios y de qué trata la NIF C-4?", title: "Inventarios: bienes que participan en la venta",
+        paragraphs: ["Los inventarios incluyen, en términos generales, bienes mantenidos para vender, productos en proceso y materiales que se consumirán en la producción o prestación de servicios.", "La NIF C-4 trata sobre inventarios. Para un caso real deben revisarse sus reglas de valuación, presentación y revelación, según la operación de la entidad."],
+        example: "En una papelería, los cuadernos destinados a la venta son inventarios. La computadora usada para administrar la tienda tiene otra finalidad y se analiza por separado.",
+        reference: "Tema de referencia · NIF C-4, Inventarios", source:"cinif", related:["entry","asset"]
+      },
+      depreciation: {
+        question: "Explícame la depreciación con un ejemplo.", title: "Depreciación: distribuir el importe depreciable",
+        paragraphs: ["La depreciación distribuye de forma sistemática el importe depreciable de un activo a lo largo de su vida útil. No equivale necesariamente a su pérdida de precio en el mercado.", "En el método de línea recta: depreciación anual = (costo − valor residual) ÷ vida útil. La vida útil y el método deben responder al uso esperado del activo."],
+        example: "Equipo de $12,000, valor residual de $2,000 y vida útil de 5 años: ($12,000 − $2,000) ÷ 5 = $2,000 anuales. Supuesto: un año completo de uso y método de línea recta.",
+        after: "La depreciación contable y las deducciones fiscales siguen criterios distintos. Este ejemplo solo ilustra la distribución contable.", reference: "Tema de referencia · NIF C-6, Propiedades, planta y equipo", source:"cinif", related:["asset","entry"]
+      },
+      statements: {
+        question: "¿Cuáles son los estados financieros básicos?", title: "Cuatro perspectivas del mismo negocio",
+        paragraphs:["Para una entidad lucrativa, un panorama introductorio incluye estos estados financieros, acompañados de sus notas:"],
+        bullets:["Estado de situación financiera: muestra activos, pasivos y capital en una fecha.","Estado de resultado integral: presenta ingresos, costos, gastos y los demás componentes del resultado integral de un periodo.","Estado de cambios en el capital contable: explica sus movimientos durante el periodo.","Estado de flujos de efectivo: muestra entradas y salidas de efectivo clasificadas por actividades."],
+        example:"Tener utilidad no significa tener ese mismo importe disponible en bancos. Una venta a crédito puede generar una cuenta por cobrar antes de generar efectivo.",
+        related:["equation","accrual"]
+      },
+      accrual: {
+        question:"¿Qué significa devengación contable?",title:"Devengar no es lo mismo que cobrar o pagar",
+        paragraphs:["La devengación reconoce los efectos de las operaciones cuando ocurren, según los criterios aplicables, independientemente de cuándo se cobra o se paga.","Esto permite relacionar las operaciones con el periodo al que corresponden."],
+        example:"Si el negocio recibe un servicio en marzo y lo paga en abril, bajo los supuestos de reconocimiento del ejemplo registra el gasto y la obligación en marzo; en abril registra el pago.",related:["statements","liability"]
+      },
+      help: {
+        question:"¿En qué me puedes ayudar?",title:"Elige por dónde comenzar",
+        paragraphs:["Puedo mostrarte explicaciones preparadas de NIF, activo, pasivo, capital, inventarios, depreciación, estados financieros, devengación y partida doble.","Para resolver un asiento con tu importe, utiliza el generador de ejercicios. El chat reconoce temas; no interpreta operaciones completas ni calcula importes escritos en una pregunta."],
+        related:["nif","entry","depreciation"]
+      },
+      greeting:{question:"Hola",title:"¡Hola! Vamos paso a paso.",paragraphs:["Puedes preguntarme, por ejemplo, qué es un activo o cómo funciona la partida doble. También puedes elegir un tema de los siguientes."],related:["nif","equation","entry"]},
+      thanks:{question:"Gracias",title:"¡De nada!",paragraphs:["Si quieres afianzar lo aprendido, prueba una operación en el generador de asientos o repasemos otro concepto."],related:["entry","inventory","statements"]},
+      unknown:{question:"",title:"Ese tema todavía no está preparado",
+        paragraphs:["Este prototipo usa respuestas locales y solo cubre algunos conceptos. No tengo una respuesta preparada para esa consulta.","Elige uno de los temas siguientes. Para calcular un asiento, selecciona una operación y un importe en el generador."],related:["help","nif","entry"]},
+      custom:{question:"",title:"Usemos el generador para tu operación",
+        paragraphs:["El chat muestra ejemplos fijos y no resuelve operaciones o importes escritos en texto libre. Para calcular con tu importe, usa el formulario «Construye tu primer asiento».","Están disponibles compras de inventario al contado o a crédito, aportaciones de capital y pagos a proveedores. Los ejemplos omiten impuestos y operaciones adicionales."],related:["entry","help"]}
+    };
+
+    // 2. EJERCICIOS: cantidades en centavos para no acumular errores decimales.
+    const OPERATIONS = {
+      cash_purchase:{debit:"Inventarios",credit:"Bancos",explanation:"Aumenta Inventarios y disminuye Bancos. Se supone pago bancario y un sistema de inventarios perpetuos."},
+      credit_purchase:{debit:"Inventarios",credit:"Proveedores",explanation:"Aumenta Inventarios y nace una deuda con el proveedor. Se supone un sistema de inventarios perpetuos."},
+      capital:{debit:"Bancos",credit:"Capital social",explanation:"Aumenta Bancos y aumenta el capital aportado. Se supone una aportación formalizada, depositada en el banco."},
+      supplier_payment:{debit:"Proveedores",credit:"Bancos",explanation:"Disminuye una deuda ya registrada con el proveedor y disminuye Bancos. Se supone una deuda suficiente y pago sin intereses."}
+    };
+    const currency = new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",minimumFractionDigits:2,maximumFractionDigits:2});
+    const money = cents => currency.format(cents/100);
+    function parseAmount(value){
+      const raw=String(value).trim();
+      // Acepta 1000, 1000.50 y 1,000.50; no confunde 1,50 con 150.
+      if(!/^(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d{1,2})?$/.test(raw)) throw new Error("Usa un importe como 1000 o 1000.50, con máximo dos decimales.");
+      const cents=Math.round(Number(raw.replace(/,/g,""))*100);
+      if(!Number.isSafeInteger(cents)||cents<=0||cents>999999999) throw new Error("Escribe un importe entre $0.01 y $9,999,999.99.");
+      return cents;
+    }
+    function buildEntry(operation,cents){
+      if(!Object.hasOwn(OPERATIONS,operation)) throw new Error("Elige una operación disponible.");
+      if(!Number.isSafeInteger(cents)||cents<=0||cents>999999999) throw new Error("El importe no es válido.");
+      const op=OPERATIONS[operation];
+      return {rows:[{account:op.debit,debit:cents,credit:0},{account:op.credit,debit:0,credit:cents}],totalDebit:cents,totalCredit:cents,explanation:op.explanation};
+    }
+
+    // 3. CHAT LOCAL: reglas por palabras completas, sin API ni claves privadas.
+    const normalize=text=>text.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+    const TOPIC_RULES=[
+      ["depreciation",/\b(depreciacion|depreciar|deprecia|depreciable|vida util|valor residual|c 6|c6)\b/],
+      ["accrual",/\b(devengacion|devengar|devengado|devengada)\b/],
+      ["statements",/\b(estados? financieros?|estado de resultados?|estado de situacion|balance general|flujo de efectivo|flujos de efectivo)\b/],
+      ["entry",/\b(asientos?|partida doble|debe|haber|cargo|abono|cargos|abonos)\b/],
+      ["inventory",/\b(inventarios?|c 4|c4|mercancias?)\b/],
+      ["capital",/\b(capital|patrimonio)\b/],
+      ["liability",/\b(pasivos?|obligaciones?|deudas?)\b/],
+      ["asset",/\b(activos?|recursos?)\b/],
+      ["nif",/\b(nif|nifs|normas de informacion financiera|marco conceptual|cinif|a 1|a1)\b/]
+    ];
+    function resolveTopic(question){
+      const q=normalize(question);
+      if(/^(hola|buenos dias|buenas tardes|buenas noches|buenas|hey)( contia)?$/.test(q)) return "greeting";
+      if(/^(muchas )?gracias( contia)?$/.test(q)) return "thanks";
+      if(/\b(ayuda|temas|puedes hacer|puedes ayudar|que haces)\b/.test(q)) return "help";
+      const normCode=q.match(/\bnif\s+([a-z])\s*(\d+)\b/);
+      if(normCode&&!(["a1","c4","c6"].includes(normCode[1]+normCode[2]))) return "unknown";
+      if(/\b(iva|isr|impuestos?|fiscal|fiscales|sat|nomina|niif|ifrs|ley|legal)\b/.test(q)) return "unknown";
+      const withoutNormCodes=q.replace(/\b(?:nif\s+)?[a-z]\s*\d+\b/g,"");
+      if(/\b(calcula|calcular|calculo|resuelve|resolver|asientos?|registre|registra|registrar|compre|vendi|pague|compra|venta|pago)\b/.test(q)&&/\d/.test(withoutNormCodes)) return "custom";
+      const equationWords=[/\bactivos?\b/,/\bpasivos?\b/,/\bcapital\b/].filter(re=>re.test(q)).length;
+      if(/\b(ecuacion|dualidad)\b/.test(q)||equationWords>1) return "equation";
+      // Respuestas cortas con contexto: «dame un ejemplo» usa el último tema.
+      if(/^(y )?(un ejemplo|dame un ejemplo|otro ejemplo|explicame mas|mas detalles|ejemplo|si)$/.test(q)) return currentTopic||"help";
+      for(const [id,re] of TOPIC_RULES){if(re.test(q)) return id;}
+      return "unknown";
+    }
+
+    // 4. INTERFAZ: el texto del usuario siempre se inserta con textContent.
+    const $=id=>document.getElementById(id);
+    const nodes={messages:$("messages"),welcome:$("welcome"),scroll:$("chat-scroll"),question:$("question"),send:$("send-button"),typing:$("typing"),result:$("entry-result"),error:$("form-error")};
+    let currentTopic=null;
+    let pendingReply=null;
+    let busy=false;
+    let messageCount=0;
+    let finishPending=null;
+    function element(tag,className,text){const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node;}
+    function icon(id){const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("class","icon");svg.setAttribute("aria-hidden","true");const use=document.createElementNS(svg.namespaceURI,"use");use.setAttribute("href","#i-"+id);svg.append(use);return svg;}
+    function scrollToLatest(){nodes.scroll.scrollTo({top:nodes.scroll.scrollHeight,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}
+    function updateInput(){const value=nodes.question.value;$("char-count").textContent=value.length;nodes.send.disabled=busy||!value.trim();nodes.question.style.height="auto";nodes.question.style.height=Math.min(nodes.question.scrollHeight,128)+"px";}
+    function setBusy(value){busy=value;nodes.typing.hidden=!value;nodes.messages.setAttribute("aria-busy",String(value));nodes.send.disabled=value||!nodes.question.value.trim();document.querySelectorAll("[data-topic]").forEach(button=>button.disabled=value);}
+    function setSelectedTopic(id){document.querySelectorAll(".sidebar [data-topic]").forEach(button=>button.setAttribute("aria-current",String(button.dataset.topic===id)));$("home-button").setAttribute("aria-current",String(!id));}
+    function appendUser(text){const article=element("article","message user");article.setAttribute("aria-label","Tu pregunta");const body=element("div","message-body");body.append(element("p","answer",text));article.append(body);nodes.messages.append(article);}
+    function renderTable(entry,caption){
+      const wrap=element("div","table-wrap");wrap.tabIndex=0;wrap.setAttribute("role","region");wrap.setAttribute("aria-label",caption);
+      const table=element("table");table.append(element("caption","sr-only",caption+", importes en pesos mexicanos"));
+      const head=document.createElement("thead");const header=document.createElement("tr");
+      for(const text of ["Cuenta","Debe","Haber"]){const th=element("th",null,text);th.scope="col";header.append(th);}head.append(header);table.append(head);
+      const body=document.createElement("tbody");for(const row of entry.rows){const tr=document.createElement("tr");tr.append(element("td",null,row.account),element("td",null,row.debit?money(row.debit):"—"),element("td",null,row.credit?money(row.credit):"—"));body.append(tr);}table.append(body);
+      const footer=document.createElement("tfoot");const total=document.createElement("tr");total.append(element("td",null,"Total"),element("td",null,money(entry.totalDebit)),element("td",null,money(entry.totalCredit)));footer.append(total);table.append(footer);wrap.append(table);return wrap;
+    }
+    function appendAnswer(id){
+      const topic=TOPICS[id];const article=element("article","message assistant");article.setAttribute("aria-label","Respuesta de ContIA");const avatar=element("div","avatar","C");avatar.setAttribute("aria-hidden","true");const body=element("div","message-body");body.append(element("p","message-label","ContIA · Respuesta preparada"));const answer=element("div","answer");answer.append(element("h3",null,topic.title));
+      for(const text of topic.paragraphs||[]) answer.append(element("p",null,text));
+      if(topic.bullets){const list=document.createElement("ul");for(const text of topic.bullets)list.append(element("li",null,text));answer.append(list);}
+      if(topic.example)answer.append(element("p","example",topic.example));
+      if(topic.entry)answer.append(renderTable(buildEntry(topic.entry.operation,topic.entry.cents),"Ejemplo fijo: compra por $1,000"));
+      if(topic.after)answer.append(element("p",null,topic.after));
+      if(topic.reference){const ref=element("p","reference",topic.reference+" · ");const link=element("a",null,"Referencia CINIF");link.href=SOURCES[topic.source];link.target="_blank";link.rel="noopener noreferrer";ref.append(link);answer.append(ref);}
+      if(topic.related){const followups=element("div","followups");for(const target of topic.related){const button=element("button","followup",TOPICS[target].question);button.type="button";button.dataset.topic=target;followups.append(button);}answer.append(followups);}
+      body.append(answer);article.append(avatar,body);nodes.messages.append(article);
+    }
+    function submitQuestion(question,forcedTopic){
+      const text=String(question).trim();if(busy||!text)return Promise.resolve({error:"Espera a que termine la respuesta o escribe una pregunta."});
+      if(text.length>500)return Promise.resolve({error:"La pregunta admite hasta 500 caracteres."});
+      const id=forcedTopic||resolveTopic(text);if(!Object.hasOwn(TOPICS,id))return Promise.resolve({error:"Tema no disponible."});
+      nodes.welcome.hidden=true;appendUser(text);messageCount++;nodes.question.value="";updateInput();setBusy(true);scrollToLatest();
+      return new Promise(resolve=>{finishPending=resolve;pendingReply=setTimeout(()=>{pendingReply=null;finishPending=null;appendAnswer(id);if(!["unknown","custom","greeting","thanks","help"].includes(id))currentTopic=id;setSelectedTopic(currentTopic);setBusy(false);scrollToLatest();resolve({topic:id,title:TOPICS[id].title});},380);});
+    }
+    function resetConversation(){
+      if(pendingReply!==null)clearTimeout(pendingReply);pendingReply=null;if(finishPending)finishPending({cancelled:true});finishPending=null;
+      currentTopic=null;messageCount=0;nodes.messages.replaceChildren();nodes.welcome.hidden=false;nodes.question.value="";setBusy(false);setSelectedTopic(null);updateInput();nodes.scroll.scrollTop=0;nodes.question.focus({preventScroll:true});
+    }
+    function showEntry(operation,amount){
+      // Primero valida todo; un error nunca reemplaza un resultado válido con datos corruptos.
+      const cents=parseAmount(amount);const entry=buildEntry(operation,cents);
+      $("operation").value=operation;$("amount").value=(cents/100).toFixed(2);$("amount").removeAttribute("aria-invalid");nodes.error.hidden=true;nodes.error.textContent="";nodes.result.replaceChildren();
+      const title=element("div","result-title");title.append(icon("check"),element("span",null,"Asiento equilibrado"));nodes.result.append(title,renderTable(entry,"Asiento generado"),element("p",null,entry.explanation));nodes.result.hidden=false;
+      return {operation,amountMXN:cents/100,totalDebitMXN:entry.totalDebit/100,totalCreditMXN:entry.totalCredit/100,rows:entry.rows.map(row=>({account:row.account,debitMXN:row.debit/100,creditMXN:row.credit/100}))};
+    }
+    $("chat-form").addEventListener("submit",event=>{event.preventDefault();void submitQuestion(nodes.question.value);});
+    nodes.question.addEventListener("input",updateInput);
+    nodes.question.addEventListener("keydown",event=>{if(event.key==="Enter"&&!event.shiftKey&&!event.isComposing){event.preventDefault();$("chat-form").requestSubmit();}});
+    document.addEventListener("click",event=>{const button=event.target.closest("[data-topic]");if(!button||button.disabled)return;const id=button.dataset.topic;if(!Object.hasOwn(TOPICS,id))return;void submitQuestion(TOPICS[id].question,id);if(matchMedia("(max-width: 700px)").matches)$("chat-title").scrollIntoView({block:"start",behavior:"smooth"});});
+    $("entry-form").addEventListener("submit",event=>{event.preventDefault();try{showEntry($("operation").value,$("amount").value);}catch(error){nodes.result.hidden=true;nodes.error.textContent=error.message;nodes.error.hidden=false;$("amount").setAttribute("aria-invalid","true");$("amount").focus();}});
+    for(const id of ["operation","amount"]){$(id).addEventListener("input",()=>{nodes.result.hidden=true;nodes.error.hidden=true;$("amount").removeAttribute("aria-invalid");});}
+    function requestReset(){if(messageCount===0){resetConversation();return;}$("reset-dialog").showModal();}
+    $("reset-button").addEventListener("click",requestReset);$("home-button").addEventListener("click",()=>nodes.question.focus({preventScroll:true}));
+    $("cancel-reset").addEventListener("click",()=>$("reset-dialog").close());$("confirm-reset").addEventListener("click",()=>{$("reset-dialog").close();resetConversation();});
+    updateInput();
+
+    // 5. INTEGRACIÓN OPCIONAL DEL NAVEGADOR. No afecta al modo sin conexión.
+    // Reutiliza exactamente las mismas acciones y validaciones que los botones.
+    if(document.modelContext?.registerTool){
+      const lifecycle=new AbortController();window.addEventListener("pagehide",()=>lifecycle.abort(),{once:true});
+      const definitions=[
+        {name:"ask_accounting_tutor",title:"Consultar un concepto contable",description:"Envía una pregunta al chat local de ContIA. Solo cubre los temas preparados y actualiza la conversación visible.",inputSchema:{type:"object",properties:{question:{type:"string",minLength:1,maxLength:500}},required:["question"],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:true},execute:async input=>{if(!input||typeof input.question!=="string"||!input.question.trim()||input.question.length>500)throw new Error("Escribe una pregunta de 1 a 500 caracteres.");return await submitQuestion(input.question);}},
+        {name:"generate_practice_entry",title:"Generar un asiento de práctica",description:"Calcula y muestra un asiento simplificado sin impuestos en el generador visible. Las cantidades están expresadas en pesos mexicanos.",inputSchema:{type:"object",properties:{operation:{type:"string",enum:Object.keys(OPERATIONS)},amountMXN:{type:"string",description:"Importe positivo, hasta dos decimales: 1000.50."}},required:["operation","amountMXN"],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute:input=>{if(!input||typeof input.operation!=="string"||typeof input.amountMXN!=="string")throw new Error("Indica operación e importe.");return showEntry(input.operation,input.amountMXN);}}
+      ];
+      for(const definition of definitions){try{Promise.resolve(document.modelContext.registerTool(definition,{signal:lifecycle.signal})).catch(()=>{});}catch{/* Navegadores sin soporte completo mantienen la interfaz manual. */}}
+    }
+  </script>
+</body>
+</html>
